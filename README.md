@@ -1,4 +1,7 @@
-# Carlos Calderón
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg">
+  <img alt="Carlos Calderón — desarrollador frontend, Vue 3, visualización de datos científicos y medioambientales" src="assets/header-light.svg" width="100%">
+</picture>
 
 Desarrollo interfaces web con Vue 3. Trabajo sobre todo con datos científicos y
 medioambientales: visores de series temporales, mapas y paneles de análisis que
