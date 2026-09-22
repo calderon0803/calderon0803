@@ -1,9 +1,0 @@
-[build]
-  publish = "public"
-  functions = "netlify/functions"
-
-# Short URL for the README: /marea instead of /.netlify/functions/marea
-[[redirects]]
-  from = "/marea"
-  to = "/.netlify/functions/marea"
-  status = 200
