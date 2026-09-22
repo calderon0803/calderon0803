@@ -12,8 +12,7 @@ tienen que seguir siendo rápidos y legibles cuando el volumen crece.
   <img alt="En qué pongo el foco. Rendimiento: que el visor siga respondiendo cuando el volumen de datos crece. Visualización: series temporales, mapas y gráficos que responden a una pregunta. Accesibilidad: teclado, lectores de pantalla y contraste, WCAG 2.1." src="assets/focus-light.svg" width="100%">
 </picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=calderon0803&theme=github_dark"><img alt="Lenguajes que más uso por número de commits: JavaScript, Vue, PowerShell y Python." src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=calderon0803&theme=default" width="48%"></picture><picture><source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=calderon0803&theme=github_dark"><img alt="Distribución de mis commits por hora del día." src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=calderon0803&theme=default" width="48%"></picture>
-
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=calderon0803&theme=github_dark"><img alt="Lenguajes que más uso por número de commits: JavaScript, Vue, PowerShell y Python." src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=calderon0803&theme=default" width="100%"></picture>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg">
   <img alt="Herramientas. Framework: Vue 3, Composition API, script setup. Lenguaje: TypeScript, JavaScript. Build: Vite, Pinia. Interfaz: Quasar, SCSS. Datos: Plotly. Pruebas: Vitest, Vue Test Utils, Playwright. Accesibilidad: WCAG 2.1." src="assets/stack-light.svg" width="100%">
