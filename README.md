@@ -14,7 +14,7 @@ tienen que seguir siendo rápidos y legibles cuando el volumen crece.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/langs-dark.svg">
-  <img alt="Lenguajes por número de commits: JavaScript 83,0 %, Vue 8,5 %, PowerShell 6,4 %, Python 2,1 %." src="assets/langs-light.svg" width="100%">
+  <img alt="Reparto de lenguajes por número de commits en los últimos doce meses." src="assets/langs-light.svg" width="100%">
 </picture>
 
 <picture>

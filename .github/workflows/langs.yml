@@ -1,0 +1,35 @@
+name: Actualizar panel de lenguajes
+
+on:
+  schedule:
+    # Lunes a las 04:17 UTC. Minuto impar a propósito: en las horas en punto
+    # GitHub encola muchísimos workflows y los retrasa.
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Regenerar el panel
+        env:
+          PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
+          LOGIN: ${{ github.repository_owner }}
+        run: node scripts/generate-langs.mjs
+
+      - name: Commit si ha cambiado
+        run: |
+          if git diff --quiet -- assets; then
+            echo "El reparto no ha cambiado; no hay nada que subir."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/langs-light.svg assets/langs-dark.svg
+          git commit -m "Refresh the language panel"
+          git push
