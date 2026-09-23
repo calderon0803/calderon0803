@@ -75,31 +75,36 @@ const mix = (a, b, f) => {
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
+// Entrada escalonada que degrada bien: el valor base del elemento queda
+// visible y la animación sostiene el cero durante el retardo. Empezar en
+// opacity="0" dejaba el panel en blanco allí donde no corre SMIL.
+const fade = (delay, dur) => {
+    const total = delay + dur;
+    return `<animate attributeName="opacity" values="0;0;1" keyTimes="0;${(delay / total).toFixed(4)};1" `
+        + `dur="${total.toFixed(2)}s" begin="0s" fill="freeze"/>`;
+};
+
 export function renderPanel(langs, theme) {
     const t = THEMES[theme];
     const n = langs.length;
     const cols = langs.map((_, i) => mix(t.cf, t.cn, n === 1 ? 0 : i / (n - 1)));
     const R = BAR_H / 2;
 
+    // Los tramos son rectángulos planos y las puntas redondeadas salen de un
+    // recorte sobre toda la barra. Calcular la curva por segmento se rompía
+    // cuando uno medía menos que el radio: el trazo se iba hacia atrás.
     let x = 0;
     const segs = langs.map(([, pct], i) => {
         const w = (W * pct) / 100;
-        let d;
-        if (i === 0) {
-            d = `M${(x + R).toFixed(1)},${BAR_Y} h${(w - R).toFixed(1)} v${BAR_H} h${(-(w - R)).toFixed(1)} a${R},${R} 0 0 1 0,${-BAR_H} z`;
-        } else if (i === n - 1) {
-            d = `M${x.toFixed(1)},${BAR_Y} h${(w - R).toFixed(1)} a${R},${R} 0 0 1 0,${BAR_H} h${(-(w - R)).toFixed(1)} z`;
-        } else {
-            d = `M${x.toFixed(1)},${BAR_Y} h${w.toFixed(1)} v${BAR_H} h${(-w).toFixed(1)} z`;
-        }
-        x += w;                                   // segments accumulate along the bar
-        return `<path d="${d}" fill="${cols[i]}" opacity="0">`
-            + `<animate attributeName="opacity" from="0" to="1" begin="${(0.15 + i * 0.12).toFixed(2)}s" dur="0.45s" fill="freeze"/></path>`;
+        const seg = `<rect x="${x.toFixed(1)}" y="${BAR_Y}" width="${w.toFixed(1)}" height="${BAR_H}" fill="${cols[i]}">`
+            + fade(0.15 + i * 0.12, 0.45) + '</rect>';
+        x += w;
+        return seg;
     }).join('');
 
     const labels = langs.map(([name, pct], i) => {
         const lx = i * (W / n);
-        return `<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="${(0.3 + i * 0.12).toFixed(2)}s" dur="0.45s" fill="freeze"/>`
+        return `<g>${fade(0.3 + i * 0.12, 0.45)}`
             + `<rect x="${lx.toFixed(0)}" y="${BAR_Y + 62}" width="11" height="11" rx="2.5" fill="${cols[i]}"/>`
             + `<text x="${(lx + 20).toFixed(0)}" y="${BAR_Y + 72}" font-family="${FONT}" font-size="17" font-weight="500" fill="${t.ink}">${esc(name)}</text>`
             + `<text x="${(lx + 20).toFixed(0)}" y="${BAR_Y + 96}" font-family="${FONT}" font-size="15" fill="${t.muted}">${pct.toFixed(1)} %</text></g>`;
@@ -112,7 +117,9 @@ export function renderPanel(langs, theme) {
         + `<rect width="${W}" height="${H}" fill="${t.bg}"/>`
         + `<text x="0" y="26" font-family="${FONT}" font-size="13" font-weight="600" fill="${t.muted}" letter-spacing="2.2">`
         + `LENGUAJES POR NÚMERO DE COMMITS · ÚLTIMOS 12 MESES</text>`
-        + segs + labels + '</svg>\n';
+        + `<defs><clipPath id="bar"><rect x="0" y="${BAR_Y}" width="${W}" height="${BAR_H}" rx="${R}"/></clipPath></defs>`
+        + `<g clip-path="url(#bar)">${segs}</g>`
+        + labels + '</svg>\n';
 }
 
 async function main() {
@@ -129,6 +136,7 @@ async function main() {
 }
 
 // pathToFileURL, not string concatenation: the naive form never matches on Windows
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+const entry = process.argv[1] ? pathToFileURL(process.argv[1]).href : null;
+if (entry && import.meta.url === entry) {
     main().catch((err) => { console.error(err.message); process.exit(1); });
 }
