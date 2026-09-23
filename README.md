@@ -22,8 +22,9 @@ tienen que seguir siendo rápidos y legibles cuando el volumen crece.
   <img alt="Herramientas. Framework: Vue 3, Composition API, script setup. Lenguaje: TypeScript, JavaScript. Build: Vite, Pinia. Interfaz: Quasar, SCSS. Datos: Plotly. Pruebas: Vitest, Vue Test Utils, Playwright. Accesibilidad: WCAG 2.1." src="assets/stack-light.svg" width="100%">
 </picture>
 
----
-
-Fuera del trabajo: deporte, coleccionismo y cultura japonesa.
-
-[LinkedIn](https://www.linkedin.com/in/carlos-calderon-palacios/)
+<a href="https://www.linkedin.com/in/carlos-calderon-palacios/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/contacto-dark.svg">
+    <img alt="Contacto. LinkedIn: carlos-calderon-palacios." src="assets/contacto-light.svg" width="100%">
+  </picture>
+</a>
