@@ -19,7 +19,7 @@ tienen que seguir siendo rápidos y legibles cuando el volumen crece.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg">
-  <img alt="Herramientas. Framework: Vue 3, Composition API, script setup. Lenguaje: TypeScript, JavaScript. Build: Vite, Pinia. Interfaz: Quasar, SCSS. Datos: Plotly. Pruebas: Vitest, Vue Test Utils, Playwright. Accesibilidad: WCAG 2.1." src="assets/stack-light.svg" width="100%">
+  <img alt="Herramientas. Framework: Vue 3, Composition API, script setup, React. Lenguaje: TypeScript, JavaScript. Build: Vite, Pinia. Interfaz: Quasar, SCSS. Datos: Plotly. Pruebas: Vitest, Vue Test Utils, Playwright. Accesibilidad: WCAG 2.1." src="assets/stack-light.svg" width="100%">
 </picture>
 
 <a href="https://www.linkedin.com/in/carlos-calderon-palacios/">
